@@ -1,5 +1,6 @@
 package com.senai.ComprasOnline.Models;
 
+import com.senai.ComprasOnline.DTOs.ProdutoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,4 +26,13 @@ public class ProdutoModel {
     @Column(name = "ProdutoValor")
     private Double valor;
 
+    public ProdutoModel() {
+    }
+
+    public ProdutoModel(ProdutoDTO produtoDTO) {
+        this.descricao = produtoDTO.getDescricao();
+        this.categoria = produtoDTO.getCategoria();
+        this.ativo     = produtoDTO.getAtivo();
+        this.valor     = produtoDTO.getValor();
+    }
 }

@@ -23,4 +23,8 @@ public class ProdutoDTO {
         this.ativo     = produtoModel.getAtivo();
         this.valor     = produtoModel.getValor();
     }
+
+    public ProdutoDTO() {
+
+    }
 }

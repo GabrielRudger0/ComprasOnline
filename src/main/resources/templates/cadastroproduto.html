@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛍️ ComprasOnline.com • Listagem de produtos</title>
+    <title>🛍️ ComprasOnline.com • Cadastrar produto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
@@ -19,7 +19,7 @@
                 <a class="nav-link" href="/home">Página Inicial</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/listausuarios">Usuário</a>
+                <a class="nav-link" href="/listaprodutos">Produtos</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Contato</a>
@@ -40,54 +40,49 @@
             <p class="lead">Encontre os melhores produtos com os melhores preços!</p>
         </div>
     </div>
+    <!-- Conteúdo da Página -->
 
-    <div class="container mt-3">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        Cadastro de produto
+                    </div>
+                    <div class="card-body">
+                        <form th:method="post" th:action="@{/produto}" th:object="${produtoDTO}">
+                            <div class="form-group">
+                                <label for="descricao">Descrição</label>
+                                <input type="text" id="descricao" th:field="*{descricao}" class="form-control form-control-lg" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoria">Categoria</label>
+                                <input type="text" id="categoria" th:field="*{categoria}" class="form-control form-control-lg" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="ativo">Ativo</label>
+                                <select class="form-control" id="ativo" th:field="*{ativo}">
+                                    <option th:value="1" th:text="Sim"></option>
+                                    <option th:value="0" th:text="Não"> </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="valor">Valor</label>
+                                <input type="text" id="valor" th:field="*{valor}" class="form-control form-control-lg" required/>
+                            </div>
 
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Produtos</h6>
-            </div>
-            <div class="card-body">
+                            <div class="pt-1 mb-4">
+                                <input type="submit" value="Cadastrar" class="btn btn-dark">
+                            </div>
+                        </form>
 
-                <p class="card-text">
-                    <a th:href="@{/produto}" class="btn btn-dark">Cadastrar produto</a>
-                </p>
-
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Descrição</th>
-                            <th>Categoria</th>
-                            <th>Ativo</th>
-                            <th>Valor</th>
-                            <th style="white-space: nowrap;">Ação</th>
-                            <th style="white-space: nowrap;"></th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr th:each="produto : ${produtos}">
-                            <td th:text="${produto.id}"></td>
-                            <td th:text="${produto.descricao}"></td>
-                            <td th:text="${produto.categoria}"></td>
-                            <td th:text="${produto.ativo}"></td>
-                            <td th:text="${produto.valor}"></td>
-                            <!-- <td><a th:href="@{'/visualizarusuario/' + ${usuario.id}}" class="btn btn-warning">Visualizar</a></td>-->
-                            <td><button th:data-produto-id="${produto.id}" class="excluir btn btn-danger">Excluir</<button></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 </div>
-
-<script src="/excluir_produto.js"></script>
-
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

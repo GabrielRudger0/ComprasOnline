@@ -20,4 +20,6 @@ public class ListaProdutosController {
         model.addAttribute("produtos", produtoService.obterListaProdutos());
         return "listaprodutos";
     }
+
+
 }
