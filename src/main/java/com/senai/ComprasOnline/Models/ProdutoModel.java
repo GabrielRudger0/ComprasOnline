@@ -35,4 +35,12 @@ public class ProdutoModel {
         this.ativo     = produtoDTO.getAtivo();
         this.valor     = produtoDTO.getValor();
     }
+
+    public ProdutoModel(Long id, ProdutoDTO produtoDTO) {
+        this.id        = id;
+        this.descricao = produtoDTO.getDescricao();
+        this.categoria = produtoDTO.getCategoria();
+        this.ativo     = produtoDTO.getAtivo();
+        this.valor     = produtoDTO.getValor();
+    }
 }

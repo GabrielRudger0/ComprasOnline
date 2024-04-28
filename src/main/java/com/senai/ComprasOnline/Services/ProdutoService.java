@@ -37,16 +37,20 @@ public class ProdutoService {
 
         produtoRepository.deleteById(id);
         return true;
+    }
 
-//        Optional<ProdutoModel> produtoBD = produtoRepository.findById(id);
-//
-//        if (!produtoBD.isPresent()){
-//            return false;
-//        }
-//
-//        produtoRepository.delete(produtoBD.get());
-//        return true;
+    public ProdutoDTO obterProduto(Long id) {
+        Optional<ProdutoModel> produtoBD = produtoRepository.findById(id);
+        if(!produtoBD.isPresent()) {
+            return null;
+        }
 
+        return new ProdutoDTO(produtoBD.get());
+    }
+
+    public boolean atualizarProduto(Long id, ProdutoDTO produto) {
+        produtoRepository.save(new ProdutoModel(id, produto));
+        return true;
     }
 
 
