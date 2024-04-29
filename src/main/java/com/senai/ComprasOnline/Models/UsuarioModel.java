@@ -1,5 +1,6 @@
 package com.senai.ComprasOnline.Models;
 
+import com.senai.ComprasOnline.DTOs.LoginDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +23,19 @@ public class UsuarioModel {
     private String email;
     
     @Column(name = "senha", nullable = false, length = 90)
-    private String senha; 
+    private String senha;
+
+    public UsuarioModel() {
+    }
+
+    public UsuarioModel(LoginDto login) {
+        this.id     = login.getId();
+        this.email  = login.getEmail();
+        this.senha  = login.getSenha();
+    }
+
+
+
+
 
 }

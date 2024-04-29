@@ -75,6 +75,13 @@ public class UsuarioService {
         
         return true;
     }
+
+    public boolean atualizarUsuario(LoginDto usuario) {
+
+        usuarioRepository.save(new UsuarioModel(usuario));
+
+        return true;
+    }
     
     public boolean excluirUsuario(Long id){
         
@@ -107,5 +114,23 @@ public class UsuarioService {
         usuarioDto.setEmail(optionalUsuario.get().getEmail());        
         
         return usuarioDto;
+    }
+
+    public LoginDto obterLoginDto(Long id) {
+        Optional<UsuarioModel> optionalLogin = usuarioRepository.findById(id);
+
+        LoginDto LoginDto = new LoginDto();
+
+        if (!optionalLogin.isPresent()){
+            LoginDto.setId(0L);
+            return LoginDto;
+        }
+
+        LoginDto.setId(optionalLogin.get().getId());
+        LoginDto.setEmail(optionalLogin.get().getEmail());
+        LoginDto.setSenha(optionalLogin.get().getSenha());
+
+        return LoginDto;
+
     }
 }
