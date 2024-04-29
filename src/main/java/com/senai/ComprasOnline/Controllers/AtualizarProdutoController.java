@@ -29,6 +29,7 @@ public class AtualizarProdutoController {
     @PostMapping()
     public String atualizarProduto(@ModelAttribute("produtoatualizado") ProdutoDTO produtoDTO){
 
+
         produtoService.atualizarProduto(produtoDTO.getId(), produtoDTO);
         System.out.println(produtoDTO.getId());
 
