@@ -20,14 +20,18 @@ public class ListaProdutosController {
 
     @GetMapping()
     public String exibirListaProdutos(Model model) {
-
+        model.addAttribute("buscarProdutoDTO", new BuscarProdutoDTO(""));
         model.addAttribute("produtos", produtoService.obterListaProdutos());
         return "listaprodutos";
     }
 
     @PostMapping()
-    public String atualizarProduto(@ModelAttribute("buscarproduto") BuscarProdutoDTO buscarProdutoDTO){
-        return "redirect:listaprodutos";
+    public String atualizarProduto(Model model, @ModelAttribute("buscarProdutoDTO") BuscarProdutoDTO buscarProdutoDTO){
+        System.out.println(buscarProdutoDTO.getItemBusca());
+
+        model.addAttribute("produtos", produtoService.buscarProduto(buscarProdutoDTO.getItemBusca()));
+
+        return "listaprodutos";
     }
 
 

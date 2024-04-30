@@ -24,8 +24,12 @@ public class ProdutoService {
             return new ArrayList<ProdutoDTO>();
         }
 
-        return listaProdutosModel.stream().map(ProdutoDTO :: new).collect(Collectors.toList());
+        return converterListaProdutos(listaProdutosModel);
 
+    }
+
+    public List<ProdutoDTO> converterListaProdutos(List<ProdutoModel> listaProdutosModel) {
+        return listaProdutosModel.stream().map(ProdutoDTO :: new).collect(Collectors.toList());
     }
 
     public boolean inserirProduto(ProdutoDTO produto) {
@@ -51,6 +55,16 @@ public class ProdutoService {
     public boolean atualizarProduto(Long id, ProdutoDTO produto) {
         produtoRepository.save(new ProdutoModel(id, produto));
         return true;
+    }
+
+    public List<ProdutoDTO> buscarProduto(String produtoDescricao) {
+        List<ProdutoModel> listaProdutosModel = produtoRepository.findByDescricaoContaining(produtoDescricao);
+
+        if(listaProdutosModel.isEmpty()) {
+            return new ArrayList<ProdutoDTO>();
+        }
+
+        return converterListaProdutos(listaProdutosModel);
     }
 
 

@@ -48,21 +48,18 @@
             </div>
             <div class="card-body">
 
+                <form th:method="post" th:action="@{/listaprodutos}" th:object="${buscarProdutoDTO}">
+                    <div class="form-group">
+                        <input type="text" id="buscar" th:field="*{itemBusca}" class="form-control form-control-lg" placeholder="Buscar produto por descrição"/>
+                    </div>
+                    <div class="pt-2 mb-4">
+                        <input type="submit" value="🔍 Buscar" class="btn btn-dark">
+                    </div>
+                </form>
+
                 <p class="card-text">
                     <a th:href="@{/produto}" class="btn btn-dark">Cadastrar produto</a>
                 </p>
-
-                <form th:method="post" th:action="@{/listaprodutos}" th:object="${buscarProdutoDTO}">
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label for="buscar">ID</label>
-                            <input type="text" id="buscar" th:field="*{itemBusca}" class="form-control form-control-lg" readonly/>
-                        </div>
-                    </div>
-                    <div class="pt-1 mb-4">
-                        <input type="submit" value="Salvar" class="btn btn-dark">
-                    </div>
-                </form>
 
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
