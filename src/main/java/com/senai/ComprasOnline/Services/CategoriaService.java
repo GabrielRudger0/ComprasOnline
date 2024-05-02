@@ -24,8 +24,17 @@ public class CategoriaService {
         categoriaRepository.save(new CategoriaModel(categoria));
     }
 
+    public CategoriaDTO buscarCategoria(Long id) {
+        return new CategoriaDTO(categoriaRepository.findById(id).get());
+    }
+
     private List<CategoriaDTO> converterListaCategoria(List<CategoriaModel> listaCategoriaModel) {
         return listaCategoriaModel.stream().map(CategoriaDTO ::new).collect(Collectors.toList());
+    }
+
+    public boolean excluirCategoria(Long id) {
+        categoriaRepository.deleteById(id);
+        return true;
     }
 
 }
