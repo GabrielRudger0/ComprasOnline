@@ -26,7 +26,7 @@ public class ListaProdutosController {
     }
 
     @PostMapping()
-    public String atualizarProduto(Model model, @ModelAttribute("buscarProdutoDTO") BuscarProdutoDTO buscarProdutoDTO){
+    public String buscarProduto(Model model, @ModelAttribute("buscarProdutoDTO") BuscarProdutoDTO buscarProdutoDTO){
 
         model.addAttribute("produtos", produtoService.buscarProduto(buscarProdutoDTO.getItemBusca()));
 

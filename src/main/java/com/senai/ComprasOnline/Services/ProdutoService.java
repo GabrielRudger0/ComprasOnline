@@ -1,6 +1,7 @@
 package com.senai.ComprasOnline.Services;
 
 import com.senai.ComprasOnline.DTOs.ProdutoDTO;
+import com.senai.ComprasOnline.DTOs.VisualizarProdutoDTO;
 import com.senai.ComprasOnline.Models.ProdutoModel;
 import com.senai.ComprasOnline.Repositorys.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,19 @@ public class ProdutoService {
     @Autowired
     ProdutoRepository produtoRepository;
 
-    public List<ProdutoDTO> obterListaProdutos() {
+    public List<VisualizarProdutoDTO> obterListaProdutos() {
         List<ProdutoModel> listaProdutosModel = produtoRepository.findAll();
 
         if (listaProdutosModel.isEmpty()) {
-            return new ArrayList<ProdutoDTO>();
+            return new ArrayList<VisualizarProdutoDTO>();
         }
 
-        return converterListaProdutos(listaProdutosModel);
+        return converterListaProdutosVisual(listaProdutosModel);
 
     }
 
-    public List<ProdutoDTO> converterListaProdutos(List<ProdutoModel> listaProdutosModel) {
-        return listaProdutosModel.stream().map(ProdutoDTO :: new).collect(Collectors.toList());
+    public List<VisualizarProdutoDTO> converterListaProdutosVisual(List<ProdutoModel> listaProdutosModel) {
+        return listaProdutosModel.stream().map(VisualizarProdutoDTO:: new).collect(Collectors.toList());
     }
 
     public boolean inserirProduto(ProdutoDTO produto) {
@@ -57,14 +58,14 @@ public class ProdutoService {
         return true;
     }
 
-    public List<ProdutoDTO> buscarProduto(String produtoDescricao) {
+    public List<VisualizarProdutoDTO> buscarProduto(String produtoDescricao) {
         List<ProdutoModel> listaProdutosModel = produtoRepository.findByDescricaoContaining(produtoDescricao);
 
         if(listaProdutosModel.isEmpty()) {
-            return new ArrayList<ProdutoDTO>();
+            return new ArrayList<VisualizarProdutoDTO>();
         }
 
-        return converterListaProdutos(listaProdutosModel);
+        return converterListaProdutosVisual(listaProdutosModel);
     }
 
 

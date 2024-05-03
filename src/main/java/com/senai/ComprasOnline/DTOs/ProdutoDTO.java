@@ -1,5 +1,6 @@
 package com.senai.ComprasOnline.DTOs;
 
+import com.senai.ComprasOnline.Models.CategoriaModel;
 import com.senai.ComprasOnline.Models.ProdutoModel;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ public class ProdutoDTO {
 
     private String descricao;
 
-    private String categoria;
+    private CategoriaModel categoria;
 
     private Boolean ativo;
 

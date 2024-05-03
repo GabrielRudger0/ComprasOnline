@@ -1,6 +1,7 @@
 package com.senai.ComprasOnline.Controllers;
 
 import com.senai.ComprasOnline.DTOs.ProdutoDTO;
+import com.senai.ComprasOnline.Services.CategoriaService;
 import com.senai.ComprasOnline.Services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +17,15 @@ public class ProdutoController {
     @Autowired
     ProdutoService produtoService;
 
+    @Autowired
+    CategoriaService categoriaService;
+
     @GetMapping()
     public String exibirCadastrarProduto(Model model) {
         ProdutoDTO cadastroDto = new ProdutoDTO();
 
         model.addAttribute("produtoDTO", cadastroDto);
+        model.addAttribute("categorias", categoriaService.obterCategorias());
         return "cadastroproduto";
     }
 

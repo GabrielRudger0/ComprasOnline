@@ -17,8 +17,12 @@ public class ProdutoModel {
     @Column(name = "ProdutoDescricao")
     private String descricao;
 
-    @Column(name = "ProdutoCategoria")
+/*    @Column(name = "ProdutoCategoria")
     private String categoria;
+    */
+
+    @ManyToOne
+    private CategoriaModel categoria;
 
     @Column(name = "ProdutoAtivo")
     private Boolean ativo;
