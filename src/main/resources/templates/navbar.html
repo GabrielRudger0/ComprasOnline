@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -27,6 +27,11 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/listapermissoes">Permissões</a>
+                </li>
+                <li class="nav-item">
+                    <form th:method="post" th:action="@{/logout}">
+                        <input type="submit" value="Sair" class="btn btn-dark">
+                    </form>
                 </li>
             </ul>
         </div>

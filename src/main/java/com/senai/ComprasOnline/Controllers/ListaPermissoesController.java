@@ -1,6 +1,8 @@
 package com.senai.ComprasOnline.Controllers;
 
+import com.senai.ComprasOnline.Services.ControleSessaoService;
 import com.senai.ComprasOnline.Services.PermissaoService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,16 @@ public class ListaPermissoesController {
     @Autowired
     PermissaoService permissaoService;
 
+    @Autowired
+    ControleSessaoService controleSessao;
+
+
     @GetMapping
-    public String exibirListaPermissoes(Model model) {
+    public String exibirListaPermissoes(Model model, HttpServletRequest request) {
+
+        if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
+            return "redirect:/login";
+        }
 
         model.addAttribute("permissoes", permissaoService.buscarPermissoes());
 

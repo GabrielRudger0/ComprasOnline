@@ -165,6 +165,13 @@ public class UsuarioService {
             usuarioRepository.save(usuarioComNovaPermissao);
 
         }
-
+    }
+    public boolean existeUsuario(Object email) {
+        if (email != null) {
+            String usuarioemail = email.toString();
+            Optional<UsuarioModel> usuariobd = usuarioRepository.findByEmail(usuarioemail);
+            return usuariobd.isPresent();
+        }
+        return false;
     }
 }

@@ -2,7 +2,9 @@ package com.senai.ComprasOnline.Controllers;
 
 import com.senai.ComprasOnline.DTOs.BuscarProdutoDTO;
 import com.senai.ComprasOnline.DTOs.ProdutoDTO;
+import com.senai.ComprasOnline.Services.ControleSessaoService;
 import com.senai.ComprasOnline.Services.ProdutoService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +20,21 @@ public class ListaProdutosController {
     @Autowired
     ProdutoService produtoService;
 
+    @Autowired
+    ControleSessaoService controleSessao;
+
     @GetMapping()
-    public String exibirListaProdutos(Model model) {
+    public String exibirListaProdutos(Model model, HttpServletRequest request) {
+
+        if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
+            return "redirect:/login";
+        }
+
+        boolean permCadastroProduto = false;
+
         model.addAttribute("buscarProdutoDTO", new BuscarProdutoDTO(""));
         model.addAttribute("produtos", produtoService.obterListaProdutos());
+        model.addAttribute("permCadastroProduto", permCadastroProduto);
         return "listaprodutos";
     }
 

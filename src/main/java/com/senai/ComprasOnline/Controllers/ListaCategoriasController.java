@@ -1,6 +1,8 @@
 package com.senai.ComprasOnline.Controllers;
 
 import com.senai.ComprasOnline.Services.CategoriaService;
+import com.senai.ComprasOnline.Services.ControleSessaoService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +16,16 @@ public class ListaCategoriasController {
     @Autowired
     CategoriaService categoriaService;
 
+    @Autowired
+    ControleSessaoService controleSessao;
+
     @GetMapping
-    public String exibirListaCategorias(Model model) {
+    public String exibirListaCategorias(Model model, HttpServletRequest request) {
+
+        if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
+            return "redirect:/login";
+        }
+
         model.addAttribute("categorias", categoriaService.obterCategorias());
         return "listacategorias";
     }

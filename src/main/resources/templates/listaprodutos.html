@@ -29,7 +29,7 @@
                     </div>
                 </form>
 
-                <p class="card-text">
+                <p th:if="${permCadastroProduto == true}" class="card-text">
                     <a th:href="@{/produto}" class="btn btn-dark">Cadastrar produto</a>
                 </p>
 
