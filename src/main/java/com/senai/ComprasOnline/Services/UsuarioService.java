@@ -6,12 +6,17 @@ package com.senai.ComprasOnline.Services;
 
 import com.senai.ComprasOnline.DTOs.CadastroDto;
 import com.senai.ComprasOnline.DTOs.LoginDto;
+import com.senai.ComprasOnline.DTOs.PermissaoDTO;
 import com.senai.ComprasOnline.DTOs.UsuarioDto;
+import com.senai.ComprasOnline.Models.PermissaoModel;
 import com.senai.ComprasOnline.Models.UsuarioModel;
+import com.senai.ComprasOnline.Repositorys.PermissaoRepository;
 import com.senai.ComprasOnline.Repositorys.UsuarioRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +25,9 @@ public class UsuarioService {
     
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    PermissaoRepository permissaoRepository;
         
     public boolean validarLogin(LoginDto loginDto){
               
@@ -131,6 +139,32 @@ public class UsuarioService {
         LoginDto.setSenha(optionalLogin.get().getSenha());
 
         return LoginDto;
+
+    }
+
+    public List<PermissaoDTO> buscarPermissoesUsuario(Long id) {
+        Optional<UsuarioModel> usuario = usuarioRepository.findById(id);
+        List<PermissaoModel> permissoesUsuarioModel = usuario.get().getPermissoes();
+
+        if(!permissoesUsuarioModel.isEmpty()) {
+            return permissoesUsuarioModel.stream().map(PermissaoDTO::new).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
+    public void inserirPermissao(UsuarioDto usuario) {
+        Optional<UsuarioModel> usuarioModel = usuarioRepository.findById(usuario.getId());
+
+        if (usuarioModel.isPresent()) {
+            UsuarioModel usuarioComNovaPermissao = usuarioModel.get();
+
+            PermissaoModel permissao = permissaoRepository.findById(Long.parseLong(usuario.getPermissao())).get();
+
+            usuarioComNovaPermissao.getPermissoes().add(permissao);
+
+            usuarioRepository.save(usuarioComNovaPermissao);
+
+        }
 
     }
 }

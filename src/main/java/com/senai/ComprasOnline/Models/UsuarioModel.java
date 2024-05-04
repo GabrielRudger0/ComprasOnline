@@ -1,13 +1,10 @@
 package com.senai.ComprasOnline.Models;
 
 import com.senai.ComprasOnline.DTOs.LoginDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name="USUARIO")
@@ -24,6 +21,10 @@ public class UsuarioModel {
     
     @Column(name = "senha", nullable = false, length = 90)
     private String senha;
+
+    @ManyToMany
+    @Column(name = "permissoes")
+    private List<PermissaoModel> permissoes;
 
     public UsuarioModel() {
     }
