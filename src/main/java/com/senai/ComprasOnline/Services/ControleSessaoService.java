@@ -1,5 +1,9 @@
 package com.senai.ComprasOnline.Services;
 
+import com.senai.ComprasOnline.DTOs.ComplexUsuarioDTO;
+import com.senai.ComprasOnline.DTOs.PermissaoDTO;
+import com.senai.ComprasOnline.Enum.AcaoSistema;
+import com.senai.ComprasOnline.Models.PermissaoModel;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,20 @@ public class ControleSessaoService {
             return "redirect:login";
         }
         return "";
+    }
+
+    public boolean validarUsuarioPermissao(HttpServletRequest request, AcaoSistema acao) {
+        HttpSession session = request.getSession();
+
+        ComplexUsuarioDTO usuario = usuarioService.buscarUsuarioPorEmail(session.getAttribute("usuarioemail").toString());
+
+        for (PermissaoModel permissoesUsuario : usuario.getPermissoes()) {
+            if (permissoesUsuario.getAcao() == acao.ordinal()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

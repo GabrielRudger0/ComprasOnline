@@ -4,10 +4,7 @@
  */
 package com.senai.ComprasOnline.Services;
 
-import com.senai.ComprasOnline.DTOs.CadastroDto;
-import com.senai.ComprasOnline.DTOs.LoginDto;
-import com.senai.ComprasOnline.DTOs.PermissaoDTO;
-import com.senai.ComprasOnline.DTOs.UsuarioDto;
+import com.senai.ComprasOnline.DTOs.*;
 import com.senai.ComprasOnline.Models.PermissaoModel;
 import com.senai.ComprasOnline.Models.UsuarioModel;
 import com.senai.ComprasOnline.Repositorys.PermissaoRepository;
@@ -152,6 +149,10 @@ public class UsuarioService {
         return new ArrayList<>();
     }
 
+    public ComplexUsuarioDTO buscarUsuarioPorEmail(String email) {
+        return new ComplexUsuarioDTO(usuarioRepository.findByEmail(email).get());
+    }
+
     public void inserirPermissao(UsuarioDto usuario) {
         Optional<UsuarioModel> usuarioModel = usuarioRepository.findById(usuario.getId());
 
@@ -173,5 +174,16 @@ public class UsuarioService {
             return usuariobd.isPresent();
         }
         return false;
+    }
+
+    public void excluirUsuarioPermissao(Long usuarioId, Long permissaoId) {
+        UsuarioModel usuario = usuarioRepository.findById(usuarioId).get();
+        List<PermissaoModel> permissoesUsuario = usuario.getPermissoes();
+
+        permissoesUsuario.remove(permissaoRepository.findById(permissaoId).get());
+        usuario.setPermissoes(permissoesUsuario);
+
+        usuarioRepository.save(usuario);
+
     }
 }

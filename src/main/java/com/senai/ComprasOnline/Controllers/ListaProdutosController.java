@@ -2,16 +2,14 @@ package com.senai.ComprasOnline.Controllers;
 
 import com.senai.ComprasOnline.DTOs.BuscarProdutoDTO;
 import com.senai.ComprasOnline.DTOs.ProdutoDTO;
+import com.senai.ComprasOnline.Enum.AcaoSistema;
 import com.senai.ComprasOnline.Services.ControleSessaoService;
 import com.senai.ComprasOnline.Services.ProdutoService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/listaprodutos")
@@ -30,11 +28,19 @@ public class ListaProdutosController {
             return "redirect:/login";
         }
 
-        boolean permCadastroProduto = false;
+        boolean permCadastroProduto = controleSessao.validarUsuarioPermissao(request, AcaoSistema.CADASTRO_PRODUTO);
+        boolean permVisualizarProduto = controleSessao.validarUsuarioPermissao(request, AcaoSistema.VISUALIZAR_PRODUTO);
+        boolean permAtualizarProduto = controleSessao.validarUsuarioPermissao(request, AcaoSistema.ATUALIZAR_PRODUTO);
+        boolean permExcluirProduto = controleSessao.validarUsuarioPermissao(request, AcaoSistema.EXCLUIR_PRODUTO);
 
         model.addAttribute("buscarProdutoDTO", new BuscarProdutoDTO(""));
         model.addAttribute("produtos", produtoService.obterListaProdutos());
+
         model.addAttribute("permCadastroProduto", permCadastroProduto);
+        model.addAttribute("permVisualizarProduto", permVisualizarProduto);
+        model.addAttribute("permAtualizarProduto", permAtualizarProduto);
+        model.addAttribute("permExcluirProduto", permExcluirProduto);
+
         return "listaprodutos";
     }
 
