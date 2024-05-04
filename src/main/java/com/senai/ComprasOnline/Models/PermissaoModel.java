@@ -1,6 +1,7 @@
 package com.senai.ComprasOnline.Models;
 
 import com.senai.ComprasOnline.DTOs.PermissaoDTO;
+import com.senai.ComprasOnline.Enum.AcaoSistema;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,14 +18,19 @@ public class PermissaoModel {
     @Column(name = "permissaoDescricao")
     private String descricao;
 
+    @Column(name = "permissaoAcao")
+    private Integer acao;
+
     public PermissaoModel() {
     }
 
     public PermissaoModel(PermissaoDTO permissaoDTO) {
         this.descricao = permissaoDTO.getDescricao();
+        this.acao      = permissaoDTO.getAcao();
     }
     public PermissaoModel(Long id, PermissaoDTO permissaoDTO) {
         this.id = id;
         this.descricao = permissaoDTO.getDescricao();
+        this.acao      = permissaoDTO.getAcao();
     }
 }

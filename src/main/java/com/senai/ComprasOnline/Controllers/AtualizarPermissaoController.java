@@ -18,6 +18,7 @@ public class AtualizarPermissaoController {
     public String exibirAtualizarPermissao(Model model, @PathVariable Long id) {
 
         model.addAttribute("permissaoDTO", permissaoService.obterPermissao(id));
+        model.addAttribute("acoes", permissaoService.obterAcoes());
         return "atualizarpermissao";
     }
 

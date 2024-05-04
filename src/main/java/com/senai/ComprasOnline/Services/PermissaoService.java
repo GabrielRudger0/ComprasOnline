@@ -1,6 +1,8 @@
 package com.senai.ComprasOnline.Services;
 
+import com.senai.ComprasOnline.DTOs.AcaoDTO;
 import com.senai.ComprasOnline.DTOs.PermissaoDTO;
+import com.senai.ComprasOnline.Enum.AcaoSistema;
 import com.senai.ComprasOnline.Models.PermissaoModel;
 import com.senai.ComprasOnline.Repositorys.PermissaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,21 @@ public class PermissaoService {
 
     public void atualizarPermissao(PermissaoDTO permissaoDTO) {
         permissaoRepository.save(new PermissaoModel(permissaoDTO.getId(), permissaoDTO));
+    }
+
+    public List<AcaoDTO> obterAcoes() {
+        List<AcaoDTO> acoes = new ArrayList<>();
+
+        for (AcaoSistema acao : AcaoSistema.values()) {
+            AcaoDTO acaoDTO = new AcaoDTO();
+            acaoDTO.setNum(acao.ordinal());
+            acaoDTO.setDescricaoAcao(acao.getDescricaoAcao());
+
+            acoes.add(acaoDTO);
+        }
+
+        return acoes;
+
     }
 
     private List<PermissaoDTO> converterListaPermissoes(List<PermissaoModel> permissoesModel) {

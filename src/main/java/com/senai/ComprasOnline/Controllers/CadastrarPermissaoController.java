@@ -21,6 +21,7 @@ public class CadastrarPermissaoController {
     public String exibirCadastrarPermissao(Model model) {
 
         model.addAttribute("permissaoDTO", new PermissaoDTO());
+        model.addAttribute("acoes", permissaoService.obterAcoes());
 
         return "cadastropermissao";
     }
