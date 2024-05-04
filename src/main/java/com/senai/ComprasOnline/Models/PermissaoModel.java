@@ -23,4 +23,8 @@ public class PermissaoModel {
     public PermissaoModel(PermissaoDTO permissaoDTO) {
         this.descricao = permissaoDTO.getDescricao();
     }
+    public PermissaoModel(Long id, PermissaoDTO permissaoDTO) {
+        this.id = id;
+        this.descricao = permissaoDTO.getDescricao();
+    }
 }

@@ -29,6 +29,14 @@ public class PermissaoService {
         permissaoRepository.save(new PermissaoModel(permissao));
     }
 
+    public PermissaoDTO obterPermissao(Long id) {
+        return new PermissaoDTO(permissaoRepository.findById(id).get());
+    }
+
+    public void atualizarPermissao(PermissaoDTO permissaoDTO) {
+        permissaoRepository.save(new PermissaoModel(permissaoDTO.getId(), permissaoDTO));
+    }
+
     private List<PermissaoDTO> converterListaPermissoes(List<PermissaoModel> permissoesModel) {
         return permissoesModel.stream().map(PermissaoDTO::new).collect(Collectors.toList());
     }

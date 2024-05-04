@@ -41,8 +41,9 @@
                             <tr th:each="permissao : ${permissoes}">
                                 <td th:text="${permissao.id}"></td>
                                 <td th:text="${permissao.descricao}"></td>
+
+                                <td><a th:href="@{'/atualizarpermissao/' + ${permissao.id}}" class="btn btn-info">Atualizar</a></td>
                                 <!--
-                                <td><a th:href="@{'/atualizarcategoria/' + ${categoria.id}}" class="btn btn-info">Atualizar</a></td>
                                 <td><button th:data-categoria-id="${categoria.id}" class="excluir btn btn-danger">Excluir</<button></td>
                                 -->
                             </tr>
