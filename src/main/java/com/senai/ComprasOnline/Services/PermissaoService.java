@@ -25,6 +25,10 @@ public class PermissaoService {
         return converterListaPermissoes(permissoes);
     }
 
+    public void cadastrarPermissao(PermissaoDTO permissao) {
+        permissaoRepository.save(new PermissaoModel(permissao));
+    }
+
     private List<PermissaoDTO> converterListaPermissoes(List<PermissaoModel> permissoesModel) {
         return permissoesModel.stream().map(PermissaoDTO::new).collect(Collectors.toList());
     }

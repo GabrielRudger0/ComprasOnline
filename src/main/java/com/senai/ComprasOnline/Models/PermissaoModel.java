@@ -1,5 +1,6 @@
 package com.senai.ComprasOnline.Models;
 
+import com.senai.ComprasOnline.DTOs.PermissaoDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,5 +17,10 @@ public class PermissaoModel {
     @Column(name = "permissaoDescricao")
     private String descricao;
 
+    public PermissaoModel() {
+    }
 
+    public PermissaoModel(PermissaoDTO permissaoDTO) {
+        this.descricao = permissaoDTO.getDescricao();
+    }
 }
