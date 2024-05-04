@@ -33,6 +33,10 @@ public class PermissaoService {
         return new PermissaoDTO(permissaoRepository.findById(id).get());
     }
 
+    public void excluirProduto(Long id) {
+        permissaoRepository.delete(permissaoRepository.findById(id).get());
+    }
+
     public void atualizarPermissao(PermissaoDTO permissaoDTO) {
         permissaoRepository.save(new PermissaoModel(permissaoDTO.getId(), permissaoDTO));
     }
