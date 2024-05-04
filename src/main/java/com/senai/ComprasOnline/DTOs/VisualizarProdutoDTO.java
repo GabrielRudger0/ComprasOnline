@@ -23,7 +23,14 @@ public class VisualizarProdutoDTO {
     public VisualizarProdutoDTO() {
     }
 
-    public VisualizarProdutoDTO(ProdutoModel produtoDTO) {
+    public VisualizarProdutoDTO(ProdutoModel produtoModel) {
+        this.id = produtoModel.getId();
+        this.descricao = produtoModel.getDescricao();
+        this.categoria = produtoModel.getCategoria().getDescricao();
+        this.ativo = converterAtivo(produtoModel.getAtivo());
+        this.valor = formatToBrazilianReal(produtoModel.getValor());
+    }
+    public VisualizarProdutoDTO(ProdutoDTO produtoDTO) {
         this.id = produtoDTO.getId();
         this.descricao = produtoDTO.getDescricao();
         this.categoria = produtoDTO.getCategoria().getDescricao();

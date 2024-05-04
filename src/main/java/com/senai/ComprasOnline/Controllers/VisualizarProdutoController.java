@@ -1,6 +1,7 @@
 package com.senai.ComprasOnline.Controllers;
 
 import com.senai.ComprasOnline.DTOs.ProdutoDTO;
+import com.senai.ComprasOnline.DTOs.VisualizarProdutoDTO;
 import com.senai.ComprasOnline.Services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class VisualizarProdutoController {
             return "visualizarproduto";
         }
 
-        model.addAttribute("produtoDTO", produtoDTO);
+        model.addAttribute("visualizarProdutoDTO", new VisualizarProdutoDTO(produtoDTO));
         return "visualizarproduto";
     }
 }

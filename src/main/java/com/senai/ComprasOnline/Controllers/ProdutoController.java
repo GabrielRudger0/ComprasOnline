@@ -32,7 +32,7 @@ public class ProdutoController {
     @PostMapping()
     public String cadastrarProduto(@ModelAttribute("produto") ProdutoDTO produtoDTO) {
         produtoService.inserirProduto(produtoDTO);
-        return "redirect:/produto";
+        return "redirect:/listaprodutos";
     }
 
     @DeleteMapping("/{id}")

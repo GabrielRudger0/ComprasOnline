@@ -1,6 +1,7 @@
 package com.senai.ComprasOnline.Controllers;
 
 import com.senai.ComprasOnline.DTOs.ProdutoDTO;
+import com.senai.ComprasOnline.Services.CategoriaService;
 import com.senai.ComprasOnline.Services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,9 @@ public class AtualizarProdutoController {
     @Autowired
     ProdutoService produtoService;
 
+    @Autowired
+    CategoriaService categoriaService;
+
     @GetMapping("/{id}")
     public String exibirVisualizarProduto(Model model, @PathVariable Long id) {
         ProdutoDTO produtoDTO = produtoService.obterProduto(id);
@@ -23,6 +27,7 @@ public class AtualizarProdutoController {
         }
 
         model.addAttribute("produtoDTO", produtoDTO);
+        model.addAttribute("categorias", categoriaService.obterCategorias());
         return "atualizarproduto";
     }
 
