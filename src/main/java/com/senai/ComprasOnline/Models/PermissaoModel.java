@@ -13,8 +13,8 @@ public class PermissaoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "permissaoNome")
-    private String nome;
+    @Column(name = "permissaoDescricao")
+    private String descricao;
 
 
 }
