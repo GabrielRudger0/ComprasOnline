@@ -1,6 +1,11 @@
 package com.senai.ComprasOnline.Enum;
 
 public enum AcaoSistema {
+
+
+    /* NÃO ALTERE OS ITENS JÁ PRESENTES */
+    /*  APENAS INSIRA NOVAS PERMISSÕES  */
+
     CADASTRO_PRODUTO("Botão de CADASTRO de produto"),
     VISUALIZAR_PRODUTO("Botão de VISUALIZAR produto"),
     ATUALIZAR_PRODUTO("Botão de ATUALIZAR produto"),
@@ -15,7 +20,7 @@ public enum AcaoSistema {
     EXCLUIR_USUARIO("Botão de EXCLUIR USUARIO"),
     PERMISSAO_USUARIO("Botão de PERMISSOES do  USUARIO"),
 
-    USUARIO_ADM("Todas as permissões");
+    USUARIO_ADM("ADMIN");
 
     private String descricao;
 
@@ -25,5 +30,13 @@ public enum AcaoSistema {
 
     public String getDescricaoAcao() {
         return descricao;
+    }
+    public static String getDescricaoByOrdinal(int ordinal) {
+        for (AcaoSistema acaoSistema : AcaoSistema.values()) {
+            if (acaoSistema.ordinal() == ordinal) {
+                return acaoSistema.getDescricaoAcao();
+            }
+        }
+        return null;
     }
 }

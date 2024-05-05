@@ -33,27 +33,34 @@ public class SovietAcessInjection {
 
         String logPrefixo = ANSI_RED + dataHoraFormatada + ".MiG-29:00  INFO SU-25 --- [ComprasOnline] " + ANSI_RESET + ANSI_YELLOW + "[SovietAcessInjection]" + ANSI_RESET + ANSI_RED + " : " + ANSI_RESET;
 
+        System.out.println(logPrefixo + "★ Iniciando SovietAcessInjection ★");
+
         System.out.println(logPrefixo + "Injetando permissões...");
         System.out.println(ANSI_RED);
         String resultadoInjecao = permissaoService.injetarPermissoesSistema();
         System.out.println(ANSI_RESET);
-
         System.out.println(logPrefixo + resultadoInjecao);
 
-        System.out.println(logPrefixo + "Verificando usuário SECRETARIO-GERAL DO PARTIDO...");
+        System.out.println(logPrefixo + "Verificando integridade das permissões...");
+        System.out.println(ANSI_RED);
+        String resultadoAlteracao = permissaoService.atualizarPermissoesSistema();
+        System.out.println(ANSI_RESET);
+        System.out.println(logPrefixo + resultadoAlteracao);
+
+        System.out.println(logPrefixo + "Verificando existência do SECRETARIO-GERAL DO PARTIDO...");
         System.out.println(ANSI_RED);
         if (usuarioService.verificarExisteUsuarioADM()) {
             System.out.println(ANSI_RESET);
-            System.out.println(logPrefixo + "SECRETARIO-GERAL DO PARTIDO existe, continuando processo...");
+            System.out.println(logPrefixo + "SECRETARIO-GERAL DO PARTIDO já existe.");
         } else {
             System.out.println(logPrefixo + "SECRETARIO-GERAL DO PARTIDO não existe, criado um...");
             System.out.println(ANSI_RED);
             usuarioService.criarUsuarioADM();
             System.out.println(ANSI_RESET);
-            System.out.println(logPrefixo + "SECRETARIO-GERAL DO PARTIDO criado");
+            System.out.println(logPrefixo + "SECRETARIO-GERAL DO PARTIDO criado.");
         }
 
-        System.out.println(logPrefixo + "SovietAcessInjection finalizado");
+        System.out.println(logPrefixo + "★ SovietAcessInjection finalizado ★");
 
     }
 
