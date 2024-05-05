@@ -6,7 +6,8 @@ public enum AcaoSistema {
     ATUALIZAR_PRODUTO("Botão de atualizar produto"),
     EXCLUIR_PRODUTO("Botão de excluir produto"),
 
-    CADASTRO_CATEGORIA("Botão de cadastro de categoria");
+    CADASTRO_CATEGORIA("Botão de cadastro de categoria"),
+    ATUALIZAR_CATEGORIA("Botão de atualizar categoria");
 
     private String descricao;
 

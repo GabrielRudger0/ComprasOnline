@@ -24,6 +24,11 @@ public class PermissaoModel {
     public PermissaoModel() {
     }
 
+    public PermissaoModel(String descricao, Integer acao) {
+        this.descricao = descricao;
+        this.acao = acao;
+    }
+
     public PermissaoModel(PermissaoDTO permissaoDTO) {
         this.descricao = permissaoDTO.getDescricao();
         this.acao      = permissaoDTO.getAcao();

@@ -58,6 +58,31 @@ public class PermissaoService {
 
     }
 
+    public String injetarPermissoesSistema() {
+
+        if (AcaoSistema.values().length == 0) {
+            return "Nenhuma ação do sistema inserida";
+        }
+
+        int count = 0;
+
+        for (AcaoSistema acao : AcaoSistema.values()) {
+            if(!permissaoRepository.existsByAcao(acao.ordinal())) {
+                permissaoRepository.save(new PermissaoModel(acao.getDescricaoAcao(), acao.ordinal()));
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            return "Nenhuma nova permissão do sistema precisou ser inserida.";
+        }
+
+        if (count == 1) {
+            return count + " nova permissão do sistema foi inserida com sucesso!";
+        }
+        return count + " novas permissões do sistema foram inseridas com sucesso!";
+    }
+
     private List<PermissaoDTO> converterListaPermissoes(List<PermissaoModel> permissoesModel) {
         return permissoesModel.stream().map(PermissaoDTO::new).collect(Collectors.toList());
     }

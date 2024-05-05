@@ -1,5 +1,6 @@
 package com.senai.ComprasOnline.Controllers;
 
+import com.senai.ComprasOnline.Enum.AcaoSistema;
 import com.senai.ComprasOnline.Services.CategoriaService;
 import com.senai.ComprasOnline.Services.ControleSessaoService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +26,10 @@ public class ListaCategoriasController {
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
             return "redirect:/login";
         }
+
+        boolean permAtualizarCategoria = controleSessao.validarUsuarioPermissao(request, AcaoSistema.ATUALIZAR_CATEGORIA);
+
+        model.addAttribute("permAtualizarCategoria", permAtualizarCategoria);
 
         model.addAttribute("categorias", categoriaService.obterCategorias());
         return "listacategorias";
