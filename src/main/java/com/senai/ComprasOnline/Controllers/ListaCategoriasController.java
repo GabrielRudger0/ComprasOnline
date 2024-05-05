@@ -28,8 +28,10 @@ public class ListaCategoriasController {
         }
 
         boolean permAtualizarCategoria = controleSessao.validarUsuarioPermissao(request, AcaoSistema.ATUALIZAR_CATEGORIA);
+        boolean permExcluirCategoria = controleSessao.validarUsuarioPermissao(request, AcaoSistema.EXCLUIR_CATEGORIA);
 
         model.addAttribute("permAtualizarCategoria", permAtualizarCategoria);
+        model.addAttribute("permExcluirCategoria", permExcluirCategoria);
 
         model.addAttribute("categorias", categoriaService.obterCategorias());
         return "listacategorias";

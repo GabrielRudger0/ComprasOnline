@@ -53,7 +53,7 @@
                             <td th:text="${categoria.descricao}"></td>
 
                             <td th:if="${permAtualizarCategoria == true}"><a th:href="@{'/atualizarcategoria/' + ${categoria.id}}" class="btn btn-info">Atualizar</a></td>
-                            <td><button th:data-categoria-id="${categoria.id}" class="excluir btn btn-danger">Excluir</<button></td>
+                            <td th:if="${permExcluirCategoria == true}"><button th:data-categoria-id="${categoria.id}" class="excluir btn btn-danger">Excluir</<button></td>
 
                         </tr>
                         </tbody>

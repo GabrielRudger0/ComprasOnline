@@ -41,10 +41,10 @@
                                 <tr th:each="usuario : ${usuarios}">
                                     <td th:text="${usuario.id}"></td>
                                     <td th:text="${usuario.email}"></td>
-                                    <td><a th:href="@{'/visualizarusuario/' + ${usuario.id}}" class="btn btn-warning">Visualizar</a></td>
-                                    <td><a th:href="@{'/atualizarusuario/' + ${usuario.id}}" class="btn btn-info">Atualizar</a></td>
-                                    <td><button th:data-usuario-id="${usuario.id}" class="excluir btn btn-danger">Excluir</<button></td>
-                                    <td><a th:href="@{'/listapermissoesusuario/' + ${usuario.id}}"  class="btn btn-success">Inserir permissões</a></td>
+                                    <td th:if="${permVisualizarUsuario == true}"><a th:href="@{'/visualizarusuario/' + ${usuario.id}}" class="btn btn-warning">Visualizar</a></td>
+                                    <td th:if="${permAtualizarUsuario == true}"><a th:href="@{'/atualizarusuario/' + ${usuario.id}}" class="btn btn-info">Atualizar</a></td>
+                                    <td th:if="${permExcluirUsuario == true}"><button th:data-usuario-id="${usuario.id}" class="excluir btn btn-danger">Excluir</<button></td>
+                                    <td th:if="${permPermissaoUsuario == true}"><a th:href="@{'/listapermissoesusuario/' + ${usuario.id}}"  class="btn btn-success">Inserir permissões</a></td>
                                 </tr>                                
                             </tbody>                       
                         </table>                        

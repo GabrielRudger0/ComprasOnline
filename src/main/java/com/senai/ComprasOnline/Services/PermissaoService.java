@@ -20,6 +20,10 @@ public class PermissaoService {
 
     public List<PermissaoDTO> buscarPermissoes() {
         List<PermissaoModel> permissoes = permissaoRepository.findAll();
+
+        //Remove a permissão de adm
+        permissoes.removeIf(permissao -> permissao.getAcao() == AcaoSistema.USUARIO_ADM.ordinal());
+
         if (permissoes.isEmpty()) {
             return new ArrayList<>();
         }

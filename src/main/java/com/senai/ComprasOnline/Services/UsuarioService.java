@@ -5,6 +5,7 @@
 package com.senai.ComprasOnline.Services;
 
 import com.senai.ComprasOnline.DTOs.*;
+import com.senai.ComprasOnline.Enum.AcaoSistema;
 import com.senai.ComprasOnline.Models.PermissaoModel;
 import com.senai.ComprasOnline.Models.UsuarioModel;
 import com.senai.ComprasOnline.Repositorys.PermissaoRepository;
@@ -48,6 +49,9 @@ public class UsuarioService {
     public List<UsuarioDto> obterListaUsuarios(){
         
         List<UsuarioModel> listaUsuarioModel = usuarioRepository.findAll();
+
+        //Remove admin da tela (não pode ser alterado, excluido);
+        listaUsuarioModel.removeIf(usuario -> usuario.getEmail().equals("admin"));
         
         List<UsuarioDto> listaUsuario = new ArrayList();
         
@@ -185,5 +189,24 @@ public class UsuarioService {
 
         usuarioRepository.save(usuario);
 
+    }
+
+    public boolean verificarExisteUsuarioADM() {
+        return usuarioRepository.existsByEmail("admin");
+    }
+
+    public void criarUsuarioADM() {
+        UsuarioModel usuarioADM = new UsuarioModel();
+
+        usuarioADM.setEmail("admin");
+        usuarioADM.setSenha("123");
+        List<PermissaoModel> permissoes = permissaoRepository.findAll();
+        if (permissoes.isEmpty()) {
+            usuarioADM.setPermissoes(new ArrayList<>());
+        } else {
+            usuarioADM.setPermissoes(permissoes);
+        }
+
+        usuarioRepository.save(usuarioADM);
     }
 }
