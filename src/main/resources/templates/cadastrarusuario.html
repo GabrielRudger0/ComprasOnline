@@ -10,7 +10,11 @@
     </head>
     <body>
 
-    <div th:include="~{navbar}"></div>
+    <div th:if="${usuarioInterno == true}" th:include="~{navbar}"></div>
+
+    <div th:if="${usuarioInterno == false}" class="container text-center">
+        <h1 class="display-4">ComprasOnline.com</h1>
+    </div>
         
             <!-- inicio Formulário de cadastro -->
             <div class="container mt-5">

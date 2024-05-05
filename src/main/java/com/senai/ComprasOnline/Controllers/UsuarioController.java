@@ -1,7 +1,9 @@
 package com.senai.ComprasOnline.Controllers;
 
 import com.senai.ComprasOnline.DTOs.CadastroDto;
+import com.senai.ComprasOnline.Services.ControleSessaoService;
 import com.senai.ComprasOnline.Services.UsuarioService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +20,22 @@ public class UsuarioController {
     
     @Autowired
     UsuarioService usuarioService;
+
+    @Autowired
+    ControleSessaoService sessaoService;
     
     @PostMapping()
-    public String cadastrarUsuario(@ModelAttribute("usuario") CadastroDto cadastro){
+    public String cadastrarUsuario(@ModelAttribute("usuario") CadastroDto cadastro, HttpServletRequest request){
         
         boolean sucesso = usuarioService.cadastrarUsuario(cadastro);
         
         if (sucesso){
-            return "redirect:listausuarios";
+            if (sessaoService.validarUsuarioSessao(request).isEmpty()) {
+                return "redirect:listausuarios";
+            } else {
+                return "redirect:login";
+            }
+
         }
 
         return "redirect:cadastrarusuario?erro";        

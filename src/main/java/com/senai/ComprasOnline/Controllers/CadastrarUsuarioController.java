@@ -19,12 +19,14 @@ public class CadastrarUsuarioController {
     @GetMapping("/cadastrarusuario")
     public String exibirListaUsuarios(Model model, HttpServletRequest request){
 
-        if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+        CadastroDto cadastroDto = new CadastroDto();
+
+        boolean usuarioInterno = false;
+        if (controleSessao.validarUsuarioSessao(request).isEmpty()) {
+            usuarioInterno = true;
         }
 
-        CadastroDto cadastroDto = new CadastroDto();
-        
+        model.addAttribute("usuarioInterno", usuarioInterno);
         model.addAttribute("usuarioDto", cadastroDto);
         
         return "cadastrarusuario";
