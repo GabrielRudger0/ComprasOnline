@@ -25,7 +25,7 @@ public class VisualizarUsuarioController {
     public String exibirVisualizarUsuario(Model model, @PathVariable Long id, HttpServletRequest request){
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         UsuarioDto usuario = usuarioService.obterUsuario(id);

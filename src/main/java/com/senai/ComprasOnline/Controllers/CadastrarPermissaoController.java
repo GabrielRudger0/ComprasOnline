@@ -26,7 +26,7 @@ public class CadastrarPermissaoController {
     public String exibirCadastrarPermissao(Model model, HttpServletRequest request) {
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         model.addAttribute("permissaoDTO", new PermissaoDTO());

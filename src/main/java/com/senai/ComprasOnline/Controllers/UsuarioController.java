@@ -33,7 +33,7 @@ public class UsuarioController {
             if (sessaoService.validarUsuarioSessao(request).isEmpty()) {
                 return "redirect:listausuarios";
             } else {
-                return "redirect:login";
+                return "redirect:/";
             }
 
         }

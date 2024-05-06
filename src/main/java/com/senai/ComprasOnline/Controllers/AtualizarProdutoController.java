@@ -27,7 +27,7 @@ public class AtualizarProdutoController {
     public String exibirVisualizarProduto(Model model, @PathVariable Long id, HttpServletRequest request) {
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         ProdutoDTO produtoDTO = produtoService.obterProduto(id);

@@ -27,7 +27,7 @@ public class CadastrarCategoriaController {
         model.addAttribute("categoriaDTO", new CategoriaDTO());
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         return "cadastrocategoria";

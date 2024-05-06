@@ -23,7 +23,7 @@ public class AtualizarPermissaoController {
     public String exibirAtualizarPermissao(Model model, @PathVariable Long id, HttpServletRequest request) {
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         model.addAttribute("permissaoDTO", permissaoService.obterPermissao(id));

@@ -25,7 +25,7 @@ public class ListaProdutosController {
     public String exibirListaProdutos(Model model, HttpServletRequest request) {
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         boolean permCadastroProduto = controleSessao.validarUsuarioPermissao(request, AcaoSistema.CADASTRO_PRODUTO);

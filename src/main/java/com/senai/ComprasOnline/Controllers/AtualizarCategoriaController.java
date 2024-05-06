@@ -25,7 +25,7 @@ public class AtualizarCategoriaController {
     public String exibirAtualizarCategoria(Model model, @PathVariable Long id, HttpServletRequest request) {
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         model.addAttribute("categoriaDTO", categoriaService.buscarCategoria(id));

@@ -24,7 +24,7 @@ public class HomeController {
         HttpSession session = request.getSession();
         boolean loginaceito = usuarioService.existeUsuario(session.getAttribute("usuarioemail"));
         if (!loginaceito) {
-            return "redirect:login";
+            return "redirect:/";
         }
 
         return "home";

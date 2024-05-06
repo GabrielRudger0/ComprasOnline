@@ -28,7 +28,7 @@ public class ListaPermissoesController {
     public String exibirListaPermissoes(Model model, HttpServletRequest request) {
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         model.addAttribute("permissoes", permissaoService.buscarPermissoes());

@@ -24,7 +24,7 @@ public class ListaUsuariosController {
     public String exibirListaUsuarios(Model model, HttpServletRequest request){
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         boolean permVisualizarUsuario = controleSessao.validarUsuarioPermissao(request, AcaoSistema.VISUALIZAR_USUARIO);

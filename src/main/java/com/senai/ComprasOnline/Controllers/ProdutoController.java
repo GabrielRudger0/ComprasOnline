@@ -29,7 +29,7 @@ public class ProdutoController {
     public String exibirCadastrarProduto(Model model, HttpServletRequest request) {
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         ProdutoDTO cadastroDto = new ProdutoDTO();

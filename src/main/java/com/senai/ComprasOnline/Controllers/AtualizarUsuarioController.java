@@ -23,7 +23,7 @@ public class AtualizarUsuarioController {
     @GetMapping("/{id}")
     public String exibirAtualizarProduto(Model model, @PathVariable Long id, HttpServletRequest request) {
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         LoginDto loginDto = usuarioService.obterLoginDto(id);

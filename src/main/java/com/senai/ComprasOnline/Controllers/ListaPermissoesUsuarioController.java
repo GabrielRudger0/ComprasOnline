@@ -29,7 +29,7 @@ public class ListaPermissoesUsuarioController {
     public String exibirPermissoesUsuario(Model model, @PathVariable Long id, HttpServletRequest request) {
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         HttpSession session = request.getSession();

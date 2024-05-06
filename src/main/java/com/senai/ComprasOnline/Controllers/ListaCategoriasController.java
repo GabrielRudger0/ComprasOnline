@@ -24,7 +24,7 @@ public class ListaCategoriasController {
     public String exibirListaCategorias(Model model, HttpServletRequest request) {
 
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
-            return "redirect:/login";
+            return "redirect:/";
         }
 
         boolean permAtualizarCategoria = controleSessao.validarUsuarioPermissao(request, AcaoSistema.ATUALIZAR_CATEGORIA);
