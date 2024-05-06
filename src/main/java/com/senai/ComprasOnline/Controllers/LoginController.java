@@ -19,7 +19,7 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
     
-    @GetMapping("/login")
+    @GetMapping("/")
     public String exibirLogin(Model model, HttpServletRequest request){
 
         HttpSession session = request.getSession();
@@ -57,6 +57,6 @@ public class LoginController {
         
     @PostMapping("/logout")
     public String realizarLogout(Model model){
-        return "redirect:login?logout";
+        return "redirect:/?logout";
     }
 }

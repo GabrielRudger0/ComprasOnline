@@ -10,7 +10,7 @@
     </head>
     <body>
 
-    <div th:if="${usuarioInterno == true}" th:include="~{navbar}"></div>
+    <div th:if="${usuarioInterno == true}" th:replace="/navbar :: componente-navbar"></div>
 
     <div th:if="${usuarioInterno == false}" class="container text-center">
         <h1 class="display-4">ComprasOnline.com</h1>

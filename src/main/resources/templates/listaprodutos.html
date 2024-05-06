@@ -8,64 +8,64 @@
 </head>
 <body>
 
-<div th:include="~{navbar}"></div>
+    <div th:replace="/navbar :: componente-navbar"></div>
 
-<div class="container">
+    <div class="container">
 
-    <div class="container mt-3">
+        <div class="container mt-3">
 
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Produtos</h6>
-            </div>
-            <div class="card-body">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Produtos</h6>
+                </div>
+                <div class="card-body">
 
-                <form th:method="post" th:action="@{/listaprodutos}" th:object="${buscarProdutoDTO}">
-                    <div class="form-group">
-                        <input type="text" id="buscar" th:field="*{itemBusca}" class="form-control form-control-lg" placeholder="Buscar produto por descrição"/>
+                    <form th:method="post" th:action="@{/listaprodutos}" th:object="${buscarProdutoDTO}">
+                        <div class="form-group">
+                            <input type="text" id="buscar" th:field="*{itemBusca}" class="form-control form-control-lg" placeholder="Buscar produto por descrição"/>
+                        </div>
+                        <div class="pt-2 mb-4">
+                            <input type="submit" value="🔍 Buscar" class="btn btn-dark">
+                        </div>
+                    </form>
+
+                    <p th:if="${permCadastroProduto == true}" class="card-text">
+                        <a th:href="@{/produto}" class="btn btn-dark">Cadastrar produto</a>
+                    </p>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Ativo</th>
+                                <th>Valor</th>
+                                <th style="white-space: nowrap;">Ação</th>
+                                <th style="white-space: nowrap;"></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="produto : ${produtos}">
+                                <td th:text="${produto.id}"></td>
+                                <td th:text="${produto.descricao}"></td>
+                                <td th:text="${produto.categoria}"></td>
+                                <td th:text="${produto.ativo}"></td>
+                                <td th:text="${produto.valor}"></td>
+                                <td th:if="${permVisualizarProduto == true}"><a th:href="@{'/visualizarproduto/' + ${produto.id}}" class="btn btn-warning">Visualizar</a></td>
+                                <td th:if="${permAtualizarProduto == true}"><a th:href="@{'/atualizarproduto/' + ${produto.id}}" class="btn btn-info">Atualizar </a></td>
+                                <td th:if="${permExcluirProduto == true}"><button th:data-produto-id="${produto.id}" class="excluir btn btn-danger">Excluir</<button></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="pt-2 mb-4">
-                        <input type="submit" value="🔍 Buscar" class="btn btn-dark">
-                    </div>
-                </form>
-
-                <p th:if="${permCadastroProduto == true}" class="card-text">
-                    <a th:href="@{/produto}" class="btn btn-dark">Cadastrar produto</a>
-                </p>
-
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Descrição</th>
-                            <th>Categoria</th>
-                            <th>Ativo</th>
-                            <th>Valor</th>
-                            <th style="white-space: nowrap;">Ação</th>
-                            <th style="white-space: nowrap;"></th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr th:each="produto : ${produtos}">
-                            <td th:text="${produto.id}"></td>
-                            <td th:text="${produto.descricao}"></td>
-                            <td th:text="${produto.categoria}"></td>
-                            <td th:text="${produto.ativo}"></td>
-                            <td th:text="${produto.valor}"></td>
-                            <td th:if="${permVisualizarProduto == true}"><a th:href="@{'/visualizarproduto/' + ${produto.id}}" class="btn btn-warning">Visualizar</a></td>
-                            <td th:if="${permAtualizarProduto == true}"><a th:href="@{'/atualizarproduto/' + ${produto.id}}" class="btn btn-info">Atualizar </a></td>
-                            <td th:if="${permExcluirProduto == true}"><button th:data-produto-id="${produto.id}" class="excluir btn btn-danger">Excluir</<button></td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 <script src="/excluir_produto.js"></script>
 
