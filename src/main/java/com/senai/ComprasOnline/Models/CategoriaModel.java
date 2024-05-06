@@ -23,4 +23,9 @@ public class CategoriaModel {
     public CategoriaModel(CategoriaDTO categoriaDTO) {
         this.descricao = categoriaDTO.getDescricao();
     }
+
+    public CategoriaModel(Long id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
 }

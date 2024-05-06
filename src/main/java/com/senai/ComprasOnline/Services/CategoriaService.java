@@ -1,5 +1,6 @@
 package com.senai.ComprasOnline.Services;
 
+import com.senai.ComprasOnline.DTOs.CadastroDto;
 import com.senai.ComprasOnline.DTOs.CategoriaDTO;
 import com.senai.ComprasOnline.Models.CategoriaModel;
 import com.senai.ComprasOnline.Repositorys.CategoriaRepository;
@@ -35,6 +36,10 @@ public class CategoriaService {
     public boolean excluirCategoria(Long id) {
         categoriaRepository.deleteById(id);
         return true;
+    }
+
+    public void atualizarCategoria(CategoriaDTO categoria) {
+        categoriaRepository.save(new CategoriaModel(categoria.getId(), categoria.getDescricao()));
     }
 
 }

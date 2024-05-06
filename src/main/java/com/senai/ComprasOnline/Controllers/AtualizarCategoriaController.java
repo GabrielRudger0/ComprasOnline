@@ -1,5 +1,6 @@
 package com.senai.ComprasOnline.Controllers;
 
+import com.senai.ComprasOnline.DTOs.CategoriaDTO;
 import com.senai.ComprasOnline.Services.CategoriaService;
 import com.senai.ComprasOnline.Services.ControleSessaoService;
 import com.senai.ComprasOnline.Services.UsuarioService;
@@ -8,10 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/atualizarcategoria")
@@ -36,8 +34,9 @@ public class AtualizarCategoriaController {
     }
 
     @PostMapping()
-    public String atualizarCategoria() {
-        return "atualizarcategoria";
+    public String atualizarCategoria(@ModelAttribute("atualizarcategoria") CategoriaDTO categoriaDTO) {
+        categoriaService.atualizarCategoria(categoriaDTO);
+        return "redirect:/listacategorias";
     }
 
 }
