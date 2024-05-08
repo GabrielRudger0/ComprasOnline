@@ -4,7 +4,9 @@ import com.senai.ComprasOnline.DTOs.ProdutoDTO;
 import com.senai.ComprasOnline.Services.CategoriaService;
 import com.senai.ComprasOnline.Services.ControleSessaoService;
 import com.senai.ComprasOnline.Services.ProdutoService;
+import com.senai.ComprasOnline.Services.UsuarioService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,9 @@ public class ProdutoController {
 
     @Autowired
     CategoriaService categoriaService;
+
+    @Autowired
+    UsuarioService usuarioService;
 
     @Autowired
     ControleSessaoService controleSessao;
@@ -40,7 +45,16 @@ public class ProdutoController {
     }
 
     @PostMapping()
-    public String cadastrarProduto(@ModelAttribute("produto") ProdutoDTO produtoDTO) {
+    public String cadastrarProduto(@ModelAttribute("produto") ProdutoDTO produtoDTO, HttpServletRequest request) {
+
+        HttpSession sessao = request.getSession();
+        String email = "";
+        if (sessao.getAttribute("usuarioemail") != null) {
+            email = sessao.getAttribute("usuarioemail").toString();
+        }
+
+        produtoDTO.setUsuarioEmail(email);
+
         produtoService.inserirProduto(produtoDTO);
         return "redirect:/listaprodutos";
     }

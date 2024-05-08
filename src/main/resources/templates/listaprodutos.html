@@ -42,6 +42,7 @@
                                 <th>Categoria</th>
                                 <th>Ativo</th>
                                 <th>Valor</th>
+                                <th>Alterado por</th>
                                 <th style="white-space: nowrap;">Ação</th>
                                 <th style="white-space: nowrap;"></th>
                             </tr>
@@ -54,6 +55,7 @@
                                 <td th:text="${produto.categoria}"></td>
                                 <td th:text="${produto.ativo}"></td>
                                 <td th:text="${produto.valor}"></td>
+                                <td th:text="${produto.usuarioEmail}"></td>
                                 <td th:if="${permVisualizarProduto == true}"><a th:href="@{'/visualizarproduto/' + ${produto.id}}" class="btn btn-warning">Visualizar</a></td>
                                 <td th:if="${permAtualizarProduto == true}"><a th:href="@{'/atualizarproduto/' + ${produto.id}}" class="btn btn-info">Atualizar </a></td>
                                 <td th:if="${permExcluirProduto == true}"><button th:data-produto-id="${produto.id}" class="excluir btn btn-danger">Excluir</<button></td>

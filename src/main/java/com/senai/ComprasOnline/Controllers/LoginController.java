@@ -46,8 +46,6 @@ public class LoginController {
             HttpSession session = request.getSession();
             session.setAttribute("usuarioemail", loginDto.getEmail());
 
-             System.out.println("usuarioemail = " + session.getAttribute("usuarioemail"));
-
             return "redirect:home";
         }
         

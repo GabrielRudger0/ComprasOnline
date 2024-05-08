@@ -4,6 +4,7 @@ import com.senai.ComprasOnline.DTOs.ProdutoDTO;
 import com.senai.ComprasOnline.DTOs.VisualizarProdutoDTO;
 import com.senai.ComprasOnline.Models.ProdutoModel;
 import com.senai.ComprasOnline.Repositorys.ProdutoRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class ProdutoService {
 
     @Autowired
     ProdutoRepository produtoRepository;
+
+    @Autowired
+    UsuarioService usuarioService;
 
     public List<VisualizarProdutoDTO> obterListaProdutos() {
         List<ProdutoModel> listaProdutosModel = produtoRepository.findAll();
@@ -34,7 +38,8 @@ public class ProdutoService {
     }
 
     public boolean inserirProduto(ProdutoDTO produto) {
-        produtoRepository.save(new ProdutoModel(produto));
+
+        produtoRepository.save(new ProdutoModel(produto, usuarioService.buscarUsuarioModelPorEmail(produto.getUsuarioEmail())));
         return true;
     }
 
@@ -54,7 +59,9 @@ public class ProdutoService {
     }
 
     public boolean atualizarProduto(Long id, ProdutoDTO produto) {
-        produtoRepository.save(new ProdutoModel(id, produto));
+
+
+        produtoRepository.save(new ProdutoModel(id, produto, usuarioService.buscarUsuarioModelPorEmail(produto.getUsuarioEmail())));
         return true;
     }
 

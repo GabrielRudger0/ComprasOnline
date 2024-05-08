@@ -156,6 +156,9 @@ public class UsuarioService {
     public ComplexUsuarioDTO buscarUsuarioPorEmail(String email) {
         return new ComplexUsuarioDTO(usuarioRepository.findByEmail(email).get());
     }
+    public UsuarioModel buscarUsuarioModelPorEmail(String email) {
+        return usuarioRepository.findByEmail(email).get();
+    }
 
     public void inserirPermissao(UsuarioDto usuario) {
         Optional<UsuarioModel> usuarioModel = usuarioRepository.findById(usuario.getId());

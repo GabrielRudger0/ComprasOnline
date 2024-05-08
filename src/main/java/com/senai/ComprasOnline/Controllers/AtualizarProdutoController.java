@@ -4,7 +4,9 @@ import com.senai.ComprasOnline.DTOs.ProdutoDTO;
 import com.senai.ComprasOnline.Services.CategoriaService;
 import com.senai.ComprasOnline.Services.ControleSessaoService;
 import com.senai.ComprasOnline.Services.ProdutoService;
+import com.senai.ComprasOnline.Services.UsuarioService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,9 @@ public class AtualizarProdutoController {
     CategoriaService categoriaService;
 
     @Autowired
+    UsuarioService usuarioService;
+
+    @Autowired
     ControleSessaoService controleSessao;
 
     @GetMapping("/{id}")
@@ -29,6 +34,8 @@ public class AtualizarProdutoController {
         if (!controleSessao.validarUsuarioSessao(request).isEmpty()) {
             return "redirect:/";
         }
+
+        HttpSession sessao = request.getSession();
 
         ProdutoDTO produtoDTO = produtoService.obterProduto(id);
         if (produtoDTO == null) {
@@ -42,11 +49,18 @@ public class AtualizarProdutoController {
     }
 
     @PostMapping()
-    public String atualizarProduto(@ModelAttribute("produtoatualizado") ProdutoDTO produtoDTO){
+    public String atualizarProduto(@ModelAttribute("produtoatualizado") ProdutoDTO produtoDTO, HttpServletRequest request){
 
+        HttpSession sessao = request.getSession();
+
+        String email = "";
+        if (sessao.getAttribute("usuarioemail") != null) {
+            email = sessao.getAttribute("usuarioemail").toString();
+        }
+
+        produtoDTO.setUsuarioEmail(email);
 
         produtoService.atualizarProduto(produtoDTO.getId(), produtoDTO);
-        System.out.println(produtoDTO.getId());
 
         return "redirect:listaprodutos";
     }

@@ -1,5 +1,6 @@
 package com.senai.ComprasOnline.Models;
 
+import com.senai.ComprasOnline.DTOs.ComplexUsuarioDTO;
 import com.senai.ComprasOnline.DTOs.LoginDto;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -34,8 +35,6 @@ public class UsuarioModel {
         this.email  = login.getEmail();
         this.senha  = login.getSenha();
     }
-
-
 
 
 

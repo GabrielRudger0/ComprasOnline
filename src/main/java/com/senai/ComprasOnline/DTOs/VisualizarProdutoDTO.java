@@ -20,6 +20,8 @@ public class VisualizarProdutoDTO {
 
     private String valor;
 
+    private String usuarioEmail;
+
     public VisualizarProdutoDTO() {
     }
 
@@ -29,6 +31,7 @@ public class VisualizarProdutoDTO {
         this.categoria = produtoModel.getCategoria().getDescricao();
         this.ativo = converterAtivo(produtoModel.getAtivo());
         this.valor = formatToBrazilianReal(produtoModel.getValor());
+        this.usuarioEmail = produtoModel.getUsuario().getEmail();
     }
     public VisualizarProdutoDTO(ProdutoDTO produtoDTO) {
         this.id = produtoDTO.getId();
@@ -36,6 +39,7 @@ public class VisualizarProdutoDTO {
         this.categoria = produtoDTO.getCategoria().getDescricao();
         this.ativo = converterAtivo(produtoDTO.getAtivo());
         this.valor = formatToBrazilianReal(produtoDTO.getValor());
+        this.usuarioEmail = produtoDTO.getUsuarioEmail();
     }
 
     private static String formatToBrazilianReal(Double value) {

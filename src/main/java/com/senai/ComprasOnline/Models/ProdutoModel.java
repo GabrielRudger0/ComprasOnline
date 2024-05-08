@@ -1,6 +1,8 @@
 package com.senai.ComprasOnline.Models;
 
+import com.senai.ComprasOnline.DTOs.ComplexUsuarioDTO;
 import com.senai.ComprasOnline.DTOs.ProdutoDTO;
+import com.senai.ComprasOnline.DTOs.UsuarioDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,21 +32,26 @@ public class ProdutoModel {
     @Column(name = "ProdutoValor")
     private Double valor;
 
+    @ManyToOne
+    private UsuarioModel usuario;
+
     public ProdutoModel() {
     }
 
-    public ProdutoModel(ProdutoDTO produtoDTO) {
+    public ProdutoModel(ProdutoDTO produtoDTO, UsuarioModel usuarioInclusao) {
         this.descricao = produtoDTO.getDescricao();
         this.categoria = produtoDTO.getCategoria();
         this.ativo     = produtoDTO.getAtivo();
         this.valor     = produtoDTO.getValor();
+        this.usuario   = usuarioInclusao;
     }
 
-    public ProdutoModel(Long id, ProdutoDTO produtoDTO) {
+    public ProdutoModel(Long id, ProdutoDTO produtoDTO, UsuarioModel usuarioInclusao) {
         this.id        = id;
         this.descricao = produtoDTO.getDescricao();
         this.categoria = produtoDTO.getCategoria();
         this.ativo     = produtoDTO.getAtivo();
         this.valor     = produtoDTO.getValor();
+        this.usuario   = usuarioInclusao;
     }
 }
